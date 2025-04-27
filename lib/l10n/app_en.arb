@@ -1,0 +1,40 @@
+{
+  "secure_snap": "Secure Snap",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "take_photo": "Take Photo",
+  "save_photo": "Save Photo",
+  "reject": "Reject",
+  "photo_saved": "Photo saved successfully",
+  "are_you_sure_save_photo": "Are you sure you want to save this photo?",
+  "yes": "Yes",
+  "no": "No",
+  "photo_saving_exception": "An error occurred while saving the photo. Please try again.",
+  "photo_reading_exception": "An error occurred while reading photos.",
+  "no_data": "No data available",
+  "biometric_exception": "An error occurred while accessing biometric data. Please try again.",
+  "failed_to_save_pin": "Failed to save PIN",
+  "pin_set_success": "PIN set successfully",
+  "set_pin_6_digits": "Set a 6-digit PIN",
+  "pin_6_digits": "Pin should be at least 6 digits",
+  "confirm_pin": "Confirm PIN",
+  "pin_not_match": "PINs do not match",
+  "save_pin": "Save PIN",
+  "set_pin": "Set PIN",
+  "create_pin": "Create your secure PIN",
+  "enter_pin": "Enter PIN",
+  "general_error": "An error occurred. Please try again.",
+  "biometric_not_available": "Biometric authentication is not available on this device. Please use a PIN.",
+  "pin_saved": "PIN saved successfully",
+  "unlock": "Unlock",
+  "pin_incorrect": "Incorrect PIN. Please try again. {attempts} attempts left.",
+  "@pin_incorrect": {
+    "placeholders": {
+      "attempts": {
+        "type": "int"
+      }
+    }
+  },
+  "pin_not_available": "PIN not available. Please set a new PIN.",
+  "pin_blocked": "PIN blocked."
+}
