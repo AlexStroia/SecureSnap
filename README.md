@@ -56,7 +56,7 @@ flutter run
 ## 🔍 Approach
 
 - **Camera Functionality**: Utilized the `camera` plugin to implement photo capture.
-- **Secure Storage**: Used `local_auth` for biometric authentication combined with secure local storage (`path_provider` + `sqflite` / `shared_preferences`) to safely save images.
+- **Secure Storage**: Used `local_auth` for biometric authentication combined with secure local storage (`path_provider` + `sqlite3` / `flutter_secure_storage`) to safely save images.
 - **Gallery View**: Built a simple, elegant gallery using `GridView` to display all authenticated images.
 - **Biometric Security Layer**: Access to the gallery is protected by biometric authentication prompts on both Android and iOS.
 
