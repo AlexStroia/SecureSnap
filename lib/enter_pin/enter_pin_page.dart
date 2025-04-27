@@ -33,6 +33,7 @@ class EnterPinPage extends StatelessWidget {
             context.pop();
             break;
           case PinIncorrect _:
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(

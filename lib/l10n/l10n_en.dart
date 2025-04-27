@@ -106,5 +106,5 @@ class L10nEn extends L10n {
   String get pin_not_available => 'PIN not available. Please set a new PIN.';
 
   @override
-  String get pin_blocked => 'PIN blocked.';
+  String get pin_blocked => 'PIN blocked. Logging you out';
 }

@@ -73,6 +73,7 @@ class GalleryController extends Controller {
       final isPinAvailable = await _secureStorageRepository.isPinAvailable();
       if (isPinAvailable) {
         event = const PinAvailable();
+        _isLoading = false;
         tryNotifyListeners();
         return;
       }

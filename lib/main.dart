@@ -5,7 +5,6 @@ import 'app.dart';
 import 'database/database.dart';
 import 'di.dart';
 
-
 DependencyContext dependency = dependencyContext;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

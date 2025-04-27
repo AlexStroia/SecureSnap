@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:secure_snap/gallery/gallery_controller.dart';
 import 'package:secure_snap/models/photo_dto.dart';
 import 'package:secure_snap/utils/ext/date_ext.dart';
@@ -35,6 +36,8 @@ class GalleryPage extends StatelessWidget {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(l10n.photo_reading_exception)));
+        } else if (event is PinAvailable) {
+          context.push('/home/enter-pin');
         }
       },
       builder: (context, controller, child) {

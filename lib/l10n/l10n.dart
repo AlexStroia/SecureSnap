@@ -276,7 +276,7 @@ abstract class L10n {
   /// No description provided for @pin_blocked.
   ///
   /// In en, this message translates to:
-  /// **'PIN blocked.'**
+  /// **'PIN blocked. Logging you out'**
   String get pin_blocked;
 }
 

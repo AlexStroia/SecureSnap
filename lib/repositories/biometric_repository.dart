@@ -22,12 +22,9 @@ class BiometricRepositoryImpl implements BiometricRepository {
         return true;
       }
       final didAuthenticate = await _localAuth.authenticate(
-        localizedReason: 'Please authenticate to show account balance',
+        localizedReason: 'Please authenticate',
 
-        options: AuthenticationOptions(
-          useErrorDialogs: true,
-          biometricOnly: !isIntegrationTest,
-        ),
+        options: AuthenticationOptions(useErrorDialogs: true),
       );
       return didAuthenticate;
     } on PlatformException {

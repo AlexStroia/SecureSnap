@@ -21,9 +21,12 @@ class MockSecureStorage extends Fake implements FlutterSecureStorage {
   Future<void> write({
     required String key,
     required String? value,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    IOSOptions? iOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    MacOsOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     if (key == key) {
       return Future.value();
@@ -33,9 +36,12 @@ class MockSecureStorage extends Fake implements FlutterSecureStorage {
   @override
   Future<String?> read({
     required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    IOSOptions? iOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    MacOsOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     if (shouldPinBeAvailable) {
       return key == key ? pin : null;
@@ -46,9 +52,12 @@ class MockSecureStorage extends Fake implements FlutterSecureStorage {
   @override
   Future<void> delete({
     required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    IOSOptions? iOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    MacOsOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     if (key == key) {
       return Future.value();

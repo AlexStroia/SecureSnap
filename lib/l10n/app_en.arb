@@ -36,5 +36,5 @@
     }
   },
   "pin_not_available": "PIN not available. Please set a new PIN.",
-  "pin_blocked": "PIN blocked."
+  "pin_blocked": "PIN blocked. Logging you out"
 }
