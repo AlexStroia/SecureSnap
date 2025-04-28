@@ -76,7 +76,7 @@ class _PageContentState extends State<_PageContent> with FrameBinding {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.gallery)),
       body:
-          photos.isEmpty || !authenticated
+          photos.isEmpty && !authenticated
               ? NoDataView()
               : _GalleryView(photos: photos),
     );
