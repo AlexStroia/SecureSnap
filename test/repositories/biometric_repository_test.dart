@@ -5,10 +5,6 @@ import 'package:secure_snap/repositories/biometric_repository.dart';
 import '../flutter_test_config.dart';
 import '../utils/test_dependency_context.dart';
 
-const MethodChannel pathProviderChannel = MethodChannel(
-  'plugins.flutter.io/path_provider',
-);
-
 void main() {
   group(BiometricRepository, () {
     BiometricRepository setupRepository(

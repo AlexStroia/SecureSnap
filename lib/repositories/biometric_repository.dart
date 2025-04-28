@@ -18,9 +18,6 @@ class BiometricRepositoryImpl implements BiometricRepository {
   @override
   Future<bool> authenticate() async {
     try {
-      if (isIntegrationTest) {
-        return true;
-      }
       final didAuthenticate = await _localAuth.authenticate(
         localizedReason: 'Please authenticate',
 
