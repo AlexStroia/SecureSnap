@@ -26,7 +26,7 @@ void main() {
       });
 
       testWithDependencies(
-        ('should return false when authenticate is called '),
+        ('should return false when authenticate is called'),
         (testDependencyContext) async {
           testDependencyContext.localAuth.shouldAuthenticate = false;
           final sut = setupRepository(testDependencyContext);
