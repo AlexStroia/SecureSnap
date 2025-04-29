@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_auth/local_auth.dart';
@@ -10,7 +9,7 @@ import 'package:secure_snap/repositories/biometric_repository.dart';
 import 'package:secure_snap/repositories/photo_repository.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 
-class MockPhotoRepository extends Fake implements PhotoRepository {
+class FakePhotoRepository extends Fake implements PhotoRepository {
   bool shouldEmitPhotos = true;
   bool shouldThrowSavePhotoException = false;
 
@@ -38,7 +37,7 @@ class MockPhotoRepository extends Fake implements PhotoRepository {
   }
 }
 
-class MockBiometricRepository extends Fake implements BiometricRepository {
+class FakeBiometricRepository extends Fake implements BiometricRepository {
   bool shouldThrowPlatformException = false;
   bool shouldAuthenticate = true;
 
@@ -51,7 +50,7 @@ class MockBiometricRepository extends Fake implements BiometricRepository {
   }
 }
 
-class MockLocalAuthentication extends Fake implements LocalAuthentication {
+class FakeLocalAuthentication extends Fake implements LocalAuthentication {
   bool shouldThrowPlatformException = false;
   bool shouldAuthenticate = true;
 
@@ -65,7 +64,6 @@ class MockLocalAuthentication extends Fake implements LocalAuthentication {
     ],
     AuthenticationOptions options = const AuthenticationOptions(),
   }) {
-    debugPrint("Should authentiacte called");
     if (shouldThrowPlatformException) {
       throw PlatformException(code: auth_error.notAvailable);
     }

@@ -5,7 +5,7 @@ import 'package:secure_snap/database/database.dart';
 import 'package:secure_snap/di.dart';
 import 'package:secure_snap/utils/disposable.dart';
 
-import '../mocks/mocks.dart';
+import '../fakes/fakes.dart';
 
 Future<TestDependencyContext> createTestDependencyContext() async {
   final testDependencyContext = TestDependencyContext();
@@ -17,12 +17,12 @@ Future<TestDependencyContext> createTestDependencyContext() async {
     ..registerLazySingleton<Database>(
       () => Database(LazyDatabase(NativeDatabase.memory)),
     )
-    ..registerLazySingleton<MockLocalAuthentication>(
-      () => MockLocalAuthentication(),
+    ..registerLazySingleton<FakeLocalAuthentication>(
+      () => FakeLocalAuthentication(),
     )
-    ..registerLazySingleton<MockPhotoRepository>(() => MockPhotoRepository())
-    ..registerLazySingleton<MockBiometricRepository>(
-      () => MockBiometricRepository(),
+    ..registerLazySingleton<FakePhotoRepository>(() => FakePhotoRepository())
+    ..registerLazySingleton<FakeBiometricRepository>(
+      () => FakeBiometricRepository(),
     );
 
   await getIt.allReady();
@@ -33,11 +33,11 @@ Future<TestDependencyContext> createTestDependencyContext() async {
 class TestDependencyContext extends DependencyContext {
   Database get database => this();
 
-  MockPhotoRepository get photoRepository => this();
+  FakePhotoRepository get photoRepository => this();
 
-  MockBiometricRepository get biometricRepository => this();
+  FakeBiometricRepository get biometricRepository => this();
 
-  MockLocalAuthentication get localAuth => this();
+  FakeLocalAuthentication get localAuth => this();
 }
 
 extension DisposableTestExt<T extends Disposable> on T {
