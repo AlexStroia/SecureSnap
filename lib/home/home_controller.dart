@@ -22,7 +22,6 @@ class BiometricNotAvailableException extends HomeControllerEvent {
   const BiometricNotAvailableException();
 }
 
-//TODO CHECK WITH EXCEPTIONS
 class PhotoSavingException extends HomeControllerEvent {
   const PhotoSavingException();
 }
