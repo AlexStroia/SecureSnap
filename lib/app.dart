@@ -22,7 +22,6 @@ class SecureSnapMobile extends StatelessWidget {
 /// We don't want to constantly rebuild GoRouter.
 /// Especially during development, because it will reset the active location.
 /// Therefore, this widget is only responsible for storing an instance of _goRouter,
-/// which depends on the AuthController declared above.
 class _NavigationRoot extends StatefulWidget {
   const _NavigationRoot();
 

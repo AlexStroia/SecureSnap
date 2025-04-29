@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -7,10 +5,15 @@ abstract interface class BiometricRepository {
   Future<bool> authenticate();
 }
 
-bool get isIntegrationTest => Platform.environment.containsKey('FLUTTER_TEST');
+class FakeBiometricRepositoryImpl implements BiometricRepository {
+  @override
+  Future<bool> authenticate() async {
+    return true;
+  }
+}
 
-class BiometricRepositoryImpl implements BiometricRepository {
-  BiometricRepositoryImpl({required LocalAuthentication localAuth})
+class RealBiometricRepositoryImpl implements BiometricRepository {
+  RealBiometricRepositoryImpl({required LocalAuthentication localAuth})
     : _localAuth = localAuth;
 
   final LocalAuthentication _localAuth;

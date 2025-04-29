@@ -33,6 +33,7 @@ class _PhotoSelectionViewState extends State<PhotoSelectionView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton.icon(
+                      key: Key('camera_take_photo'),
                       icon: const Icon(Icons.camera_alt_outlined),
                       onPressed: () => _takePhoto(openCamera: true),
                       label: Text(l10n.camera),
@@ -50,6 +51,7 @@ class _PhotoSelectionViewState extends State<PhotoSelectionView> {
                   children: [
                     Flexible(
                       child: TextButton.icon(
+                        key: Key('save_photo'),
                         icon: const Icon(Icons.check),
                         onPressed: _onPhotoSavePressed,
                         label: Text(
@@ -100,6 +102,7 @@ class _PhotoSelectionViewState extends State<PhotoSelectionView> {
                 children: [
                   Flexible(
                     child: TextButton.icon(
+                      key: Key('save_photo_yes'),
                       icon: const Icon(Icons.check),
                       onPressed: () {
                         final imagePath = _imagePath;
@@ -136,10 +139,8 @@ class _PhotoSelectionViewState extends State<PhotoSelectionView> {
   }
 
   Future<void> _takePhoto({required bool openCamera}) async {
-    final pickedImage = await ImagePicker().pickImage(
-      source: openCamera ? ImageSource.camera : ImageSource.gallery,
-      preferredCameraDevice: CameraDevice.front,
-      imageQuality: 35,
+    final pickedImage = await context.read<PhotoPickerService>().pickImage(
+      openCamera,
     );
 
     if (pickedImage != null) {

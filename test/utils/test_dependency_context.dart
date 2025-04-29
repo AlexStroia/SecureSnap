@@ -23,8 +23,7 @@ Future<TestDependencyContext> createTestDependencyContext() async {
     ..registerLazySingleton<MockPhotoRepository>(() => MockPhotoRepository())
     ..registerLazySingleton<MockBiometricRepository>(
       () => MockBiometricRepository(),
-    )
-    ..registerLazySingleton<MockSecureStorage>(() => MockSecureStorage());
+    );
 
   await getIt.allReady();
 
@@ -33,8 +32,6 @@ Future<TestDependencyContext> createTestDependencyContext() async {
 
 class TestDependencyContext extends DependencyContext {
   Database get database => this();
-
-  MockSecureStorage get secureStorage => this();
 
   MockPhotoRepository get photoRepository => this();
 

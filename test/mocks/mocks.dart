@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
@@ -10,61 +9,6 @@ import 'package:secure_snap/models/photo_dto.dart';
 import 'package:secure_snap/repositories/biometric_repository.dart';
 import 'package:secure_snap/repositories/photo_repository.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
-
-const pin = '123456';
-const key = 'user_pin';
-
-class MockSecureStorage extends Fake implements FlutterSecureStorage {
-  bool shouldPinBeAvailable = true;
-
-  @override
-  Future<void> write({
-    required String key,
-    required String? value,
-    IOSOptions? iOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-    WebOptions? webOptions,
-    MacOsOptions? mOptions,
-    WindowsOptions? wOptions,
-  }) async {
-    if (key == key) {
-      return Future.value();
-    }
-  }
-
-  @override
-  Future<String?> read({
-    required String key,
-    IOSOptions? iOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-    WebOptions? webOptions,
-    MacOsOptions? mOptions,
-    WindowsOptions? wOptions,
-  }) async {
-    if (shouldPinBeAvailable) {
-      return key == key ? pin : null;
-    }
-    return null;
-  }
-
-  @override
-  Future<void> delete({
-    required String key,
-    IOSOptions? iOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-    WebOptions? webOptions,
-    MacOsOptions? mOptions,
-    WindowsOptions? wOptions,
-  }) async {
-    if (key == key) {
-      return Future.value();
-    }
-    throw Exception('Key not found');
-  }
-}
 
 class MockPhotoRepository extends Fake implements PhotoRepository {
   bool shouldEmitPhotos = true;

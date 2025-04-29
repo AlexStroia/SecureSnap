@@ -10,7 +10,7 @@ void main() {
     BiometricRepository setupRepository(
       TestDependencyContext testDependencyContext,
     ) {
-      return BiometricRepositoryImpl(
+      return RealBiometricRepositoryImpl(
         localAuth: testDependencyContext.localAuth,
       );
     }

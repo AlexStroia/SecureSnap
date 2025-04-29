@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:secure_snap/utils/controller_registrar.dart';
 
 import '../app.dart';
 import '../l10n/l10n.dart';
+import '../service/photo_selection_service.dart';
 import 'home_controller.dart';
 
 part 'components/photo_view.dart';

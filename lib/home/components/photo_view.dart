@@ -13,6 +13,11 @@ class PhotoView extends StatelessWidget {
       return SizedBox.shrink();
     }
 
+    final file = File(imagePath);
+    if (!file.existsSync()) {
+      return const Icon(Icons.error);
+    }
+
     return Center(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
@@ -29,7 +34,13 @@ class PhotoView extends StatelessWidget {
               ),
             ],
           ),
-          child: Image.file(File(imagePath), fit: BoxFit.cover),
+          child: Image.file(
+            File(imagePath),
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(Icons.error);
+            },
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
