@@ -18,11 +18,11 @@ DependencyContext Function() dependencyContextProvider =
 DependencyContext get dependencyContext => dependencyContextProvider();
 
 class DependencyContext implements Disposable {
-  DependencyContext() : getIt = _register();
+  DependencyContext();
 
   static final _shared = DependencyContext();
 
-  late GetIt getIt;
+  final getIt = GetIt.instance;
 
   // ignore: unreachable_from_main
   T call<T extends Object>({
@@ -39,16 +39,13 @@ class DependencyContext implements Disposable {
     );
   }
 
-  Future<void> allReady() => getIt.allReady();
+  Future<void> allReady() {
+    _register();
+    return getIt.allReady();
+  }
 
-  static GetIt _register() {
-    final getIt = GetIt.instance;
-
+  GetIt _register() {
     getIt
-      ..registerLazySingleton<Database>(
-        Database.new,
-        dispose: (database) => database.close(),
-      )
       ..registerLazySingleton<LocalAuthentication>(() => LocalAuthentication())
       ..registerLazySingleton<FlutterSecureStorage>(
         () => FlutterSecureStorage(),

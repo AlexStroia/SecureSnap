@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:secure_snap/database/database.dart';
+import 'package:secure_snap/di.dart';
 import 'package:secure_snap/main.dart' as app;
 
 void main() {
@@ -35,7 +36,7 @@ void main() {
   testWidgets('should take a photo and view it in the gallery', (
     WidgetTester tester,
   ) async {
-    final db = app.dependency.getIt<Database>();
+    final db = dependencyContext.getIt<Database>();
     await db
         .into(db.photo)
         .insert(
@@ -75,7 +76,7 @@ void main() {
   testWidgets('should view no data view when no image is taken', (
     WidgetTester tester,
   ) async {
-    final db = app.dependency.getIt<Database>();
+    final db = dependencyContext.getIt<Database>();
     await db
         .into(db.photo)
         .insert(

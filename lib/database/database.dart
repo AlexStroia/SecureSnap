@@ -25,6 +25,7 @@ class Database extends _$Database {
   Database([QueryExecutor? database])
     : super(database ?? openDriftIsolateConnection());
 
+
   static Future<Database> create() async {
     if (isIntegrationTest) {
       return Database(openTestConnection());

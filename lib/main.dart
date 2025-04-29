@@ -7,11 +7,17 @@ import 'app.dart';
 import 'database/database.dart';
 import 'di.dart';
 
-DependencyContext dependency = dependencyContext;
 bool get isIntegrationTest =>
     Platform.environment.containsKey('INTEGRATION_TEST');
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  dependencyContext.getIt.registerSingletonAsync<Database>(
+    () => Database.create(),
+    dispose: (db) => db.close(),
+  );
+
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
 
   if (!isIntegrationTest) {
@@ -20,7 +26,7 @@ Future<void> main() async {
 
   /// Wait for all dependencies to be ready before we start the app,
   /// including ensuring that our user data is warmed up.
-  await dependency.allReady();
+  await dependencyContext.allReady();
 
   runApp(const SecureSnapMobile());
 }
