@@ -26,35 +26,6 @@ final home = GoRoute(
   },
   routes: [
     GoRoute(
-      name: 'set-pin',
-      path: 'set-pin',
-      builder: (context, state) {
-        var args = const SetPinArgs();
-
-        final extra = state.extra;
-        if (extra is SetPinArgs) {
-          args = extra;
-        }
-        return SetPinPage(args: args);
-      },
-    ),
-    GoRoute(
-      name: 'enter-pin',
-      path: 'enter-pin',
-      pageBuilder: (context, state) {
-        EnterPinArgs args = EnterPinArgs();
-
-        final extra = state.extra;
-        if (extra is EnterPinArgs) {
-          args = extra;
-        }
-        return DialogPage(
-          builder: (_) => EnterPinPage(args: args),
-          barrierDismissible: false,
-        );
-      },
-    ),
-    GoRoute(
       name: 'camera',
       path: 'camera',
       builder: (context, state) {

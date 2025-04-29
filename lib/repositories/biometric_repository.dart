@@ -21,7 +21,11 @@ class BiometricRepositoryImpl implements BiometricRepository {
       final didAuthenticate = await _localAuth.authenticate(
         localizedReason: 'Please authenticate',
 
-        options: AuthenticationOptions(useErrorDialogs: false),
+        options: AuthenticationOptions(
+          biometricOnly: false,
+          stickyAuth: true,
+          useErrorDialogs: false,
+        ),
       );
       return didAuthenticate;
     } on PlatformException {

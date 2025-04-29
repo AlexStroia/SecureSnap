@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,7 +9,6 @@ import 'package:local_auth_windows/types/auth_messages_windows.dart';
 import 'package:secure_snap/models/photo_dto.dart';
 import 'package:secure_snap/repositories/biometric_repository.dart';
 import 'package:secure_snap/repositories/photo_repository.dart';
-import 'package:secure_snap/repositories/secure_storage_repository.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 
 const pin = '123456';
@@ -94,31 +94,6 @@ class MockPhotoRepository extends Fake implements PhotoRepository {
   }
 }
 
-class MockSecureStorageRepository extends Fake
-    implements SecureStorageRepository {
-  bool shouldPinBeAvailable = true;
-
-  @override
-  savePin({required String value}) async {
-    // Mock implementation
-  }
-
-  @override
-  Future<String?> getPin() async {
-    return shouldPinBeAvailable ? '1234' : null;
-  }
-
-  @override
-  Future<bool> isPinAvailable() async {
-    return shouldPinBeAvailable;
-  }
-
-  @override
-  Future<void> clearPin() async {
-    return Future.value();
-  }
-}
-
 class MockBiometricRepository extends Fake implements BiometricRepository {
   bool shouldThrowPlatformException = false;
   bool shouldAuthenticate = true;
@@ -146,6 +121,7 @@ class MockLocalAuthentication extends Fake implements LocalAuthentication {
     ],
     AuthenticationOptions options = const AuthenticationOptions(),
   }) {
+    debugPrint("Should authentiacte called");
     if (shouldThrowPlatformException) {
       throw PlatformException(code: auth_error.notAvailable);
     }

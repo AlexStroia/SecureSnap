@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:secure_snap/gallery/gallery_controller.dart';
 import 'package:secure_snap/models/photo_dto.dart';
 import 'package:secure_snap/utils/ext/date_ext.dart';
@@ -27,7 +26,6 @@ class GalleryPage extends StatelessWidget {
         return GalleryController(
           photoRepository: dependencyContext(),
           biometricRepository: dependencyContext(),
-          secureStorageRepository: dependencyContext(),
         );
       },
       listener: (controller) {
@@ -36,8 +34,10 @@ class GalleryPage extends StatelessWidget {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(l10n.photo_reading_exception)));
-        } else if (event is PinAvailable) {
-          context.push('/home/enter-pin');
+        } else if (event is BiometricNotAvailableException) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(l10n.view_photo_biometric_error)),
+          );
         }
       },
       builder: (context, controller, child) {
@@ -69,16 +69,12 @@ class _PageContentState extends State<_PageContent> with FrameBinding {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final photos = _controller.photos;
-    final authenticated = _controller.authenticated;
     if (_controller.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     return Scaffold(
       appBar: AppBar(title: Text(l10n.gallery)),
-      body:
-          photos.isEmpty && !authenticated
-              ? NoDataView()
-              : _GalleryView(photos: photos),
+      body: photos.isEmpty ? NoDataView() : _GalleryView(photos: photos),
     );
   }
 }

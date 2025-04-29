@@ -177,54 +177,6 @@ abstract class L10n {
   /// **'An error occurred while accessing biometric data. Please try again.'**
   String get biometric_exception;
 
-  /// No description provided for @failed_to_save_pin.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to save PIN'**
-  String get failed_to_save_pin;
-
-  /// No description provided for @pin_set_success.
-  ///
-  /// In en, this message translates to:
-  /// **'PIN set successfully'**
-  String get pin_set_success;
-
-  /// No description provided for @set_pin_6_digits.
-  ///
-  /// In en, this message translates to:
-  /// **'Set a 6-digit PIN'**
-  String get set_pin_6_digits;
-
-  /// No description provided for @pin_6_digits.
-  ///
-  /// In en, this message translates to:
-  /// **'Pin should be at least 6 digits'**
-  String get pin_6_digits;
-
-  /// No description provided for @confirm_pin.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm PIN'**
-  String get confirm_pin;
-
-  /// No description provided for @pin_not_match.
-  ///
-  /// In en, this message translates to:
-  /// **'PINs do not match'**
-  String get pin_not_match;
-
-  /// No description provided for @save_pin.
-  ///
-  /// In en, this message translates to:
-  /// **'Save PIN'**
-  String get save_pin;
-
-  /// No description provided for @set_pin.
-  ///
-  /// In en, this message translates to:
-  /// **'Set PIN'**
-  String get set_pin;
-
   /// No description provided for @create_pin.
   ///
   /// In en, this message translates to:
@@ -243,41 +195,17 @@ abstract class L10n {
   /// **'An error occurred. Please try again.'**
   String get general_error;
 
-  /// No description provided for @biometric_not_available.
+  /// No description provided for @save_photo_biometric_error.
   ///
   /// In en, this message translates to:
-  /// **'Biometric authentication is not available on this device. Please use a PIN.'**
-  String get biometric_not_available;
+  /// **'Unable to save photo. Biometric authentication is not available on this device. Please enable it from settings.'**
+  String get save_photo_biometric_error;
 
-  /// No description provided for @pin_saved.
+  /// No description provided for @view_photo_biometric_error.
   ///
   /// In en, this message translates to:
-  /// **'PIN saved successfully'**
-  String get pin_saved;
-
-  /// No description provided for @unlock.
-  ///
-  /// In en, this message translates to:
-  /// **'Unlock'**
-  String get unlock;
-
-  /// No description provided for @pin_incorrect.
-  ///
-  /// In en, this message translates to:
-  /// **'Incorrect PIN. Please try again. {attempts} attempts left.'**
-  String pin_incorrect(int attempts);
-
-  /// No description provided for @pin_not_available.
-  ///
-  /// In en, this message translates to:
-  /// **'PIN not available. Please set a new PIN.'**
-  String get pin_not_available;
-
-  /// No description provided for @pin_blocked.
-  ///
-  /// In en, this message translates to:
-  /// **'PIN blocked. Logging you out'**
-  String get pin_blocked;
+  /// **'Viewing photos is not available. Biometric authentication is not available on this device. Please enable it from settings.'**
+  String get view_photo_biometric_error;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

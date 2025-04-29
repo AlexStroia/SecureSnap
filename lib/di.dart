@@ -6,7 +6,6 @@ import 'package:get_it/get_it.dart' hide Disposable;
 import 'package:local_auth/local_auth.dart';
 import 'package:secure_snap/repositories/biometric_repository.dart';
 import 'package:secure_snap/repositories/photo_repository.dart';
-import 'package:secure_snap/repositories/secure_storage_repository.dart';
 import 'package:secure_snap/utils/disposable.dart';
 
 import 'database/database.dart';
@@ -53,10 +52,6 @@ class DependencyContext implements Disposable {
       ..registerLazySingleton<LocalAuthentication>(() => LocalAuthentication())
       ..registerLazySingleton<FlutterSecureStorage>(
         () => FlutterSecureStorage(),
-      )
-      ..registerLazySingleton<SecureStorageRepository>(
-        () =>
-            SecureStorageRepositoryImpl(storage: getIt<FlutterSecureStorage>()),
       )
       ..registerLazySingleton<PhotoRepository>(
         () => PhotoRepositoryImpl(database: getIt<Database>()),

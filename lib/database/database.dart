@@ -16,6 +16,8 @@ import 'package:sqlite3/sqlite3.dart' as sqlite;
 import 'package:secure_snap/database/tables.dart';
 import 'package:sqlite3/sqlite3.dart';
 
+import '../main.dart';
+
 part 'database.g.dart';
 
 @DriftDatabase(tables: [Photo])
@@ -24,6 +26,10 @@ class Database extends _$Database {
     : super(database ?? openDriftIsolateConnection());
 
   static Future<Database> create() async {
+    if (isIntegrationTest) {
+      return Database(openTestConnection());
+    }
+
     final password = await _getOrCreateEncryptionKey();
     final executor = await _openEncryptedDb(password);
     return Database(executor);
@@ -100,6 +106,14 @@ QueryExecutor openDriftIsolateConnection() {
       return DriftIsolate.fromConnectPort(port).connect();
     }),
   );
+}
+
+QueryExecutor openTestConnection() {
+  return LazyDatabase(() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File(p.join(dir.path, 'integration_test.db'));
+    return NativeDatabase(file, logStatements: true);
+  });
 }
 
 Future<void> ensureDriftBackgrounded() async {

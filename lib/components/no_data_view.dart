@@ -11,6 +11,7 @@ class NoDataView extends StatelessWidget {
     final l10n = L10n.of(context);
 
     return Center(
+      key: Key('no_data_view'),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

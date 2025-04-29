@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:secure_snap/camera/camera_page.dart';
-import 'package:secure_snap/set_pin/set_pin_page.dart';
-import 'package:secure_snap/utils/dialog_page.dart';
 
-import 'enter_pin/enter_pin_page.dart';
 import 'gallery/gallery_page.dart';
 import 'home/home_page.dart';
 import 'l10n/l10n.dart';

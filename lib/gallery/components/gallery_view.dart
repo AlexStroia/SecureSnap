@@ -37,6 +37,7 @@ class _PhotoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
+      key: Key('photo_tile'),
       borderRadius: BorderRadius.circular(12),
       child: Stack(
         children: [

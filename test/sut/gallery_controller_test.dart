@@ -11,7 +11,6 @@ void main() {
       return GalleryController(
         photoRepository: testDependencyContext.photoRepository,
         biometricRepository: testDependencyContext.biometricRepository,
-        secureStorageRepository: testDependencyContext.secureStorageRepository,
       ).ensureDisposed();
     }
 
@@ -46,7 +45,6 @@ void main() {
         await sut.attemptAuthenticateWithBiometrics();
 
         expect(sut.isLoading, isFalse);
-        expect(sut.authenticated, isTrue);
       });
 
       testWithDependencies(
@@ -55,34 +53,14 @@ void main() {
           testDependencyContext
               .biometricRepository
               .shouldThrowPlatformException = true;
-          testDependencyContext.secureStorageRepository.shouldPinBeAvailable =
-              false;
           final sut = setupController(testDependencyContext);
 
           await sut.attemptAuthenticateWithBiometrics();
 
-          expect(sut.authenticated, isFalse);
           expect(
             sut.removeEvent(),
             isInstanceOf<BiometricNotAvailableException>(),
           );
-        },
-      );
-
-      testWithDependencies(
-        'should not authenticate and return PinAvailable event',
-        (testDependencyContext) async {
-          testDependencyContext
-              .biometricRepository
-              .shouldThrowPlatformException = true;
-          testDependencyContext.secureStorageRepository.shouldPinBeAvailable =
-              true;
-          final sut = setupController(testDependencyContext);
-
-          await sut.attemptAuthenticateWithBiometrics();
-
-          expect(sut.authenticated, isFalse);
-          expect(sut.removeEvent(), isInstanceOf<PinAvailable>());
         },
       );
     });

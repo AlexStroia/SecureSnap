@@ -11,7 +11,6 @@ void main() {
       return HomeController(
         photoRepository: testDependencyContext.photoRepository,
         biometricRepository: testDependencyContext.biometricRepository,
-        secureStorageRepository: testDependencyContext.secureStorageRepository,
       ).ensureDisposed();
     }
 
@@ -44,7 +43,7 @@ void main() {
     });
 
     testWithDependencies(
-      'should throw BiometricAuthenticationException when user is not authenticated',
+      'should throw BiometricAuthenticationException when user is not authenticated with biometrics',
       (testDependencyContext) async {
         testDependencyContext.biometricRepository.shouldAuthenticate = false;
         final sut = setupController(testDependencyContext);
@@ -61,27 +60,10 @@ void main() {
     );
 
     testWithDependencies(
-      'should return PinAvailable when PlatformException is thrown',
+      'should return BiometricNotAvailableException when PlatformException is thrown',
       (testDependencyContext) async {
         testDependencyContext.biometricRepository.shouldThrowPlatformException =
             true;
-        final sut = setupController(testDependencyContext);
-        final imagePath = 'test_image_path';
-
-        await sut.savePhoto(imagePath);
-
-        expect(sut.isLoading, isFalse);
-        expect(sut.removeEvent(), isInstanceOf<PinAvailable>());
-      },
-    );
-
-    testWithDependencies(
-      'should return PinAvailable when PlatformException is thrown',
-      (testDependencyContext) async {
-        testDependencyContext.biometricRepository.shouldThrowPlatformException =
-            true;
-        testDependencyContext.secureStorageRepository.shouldPinBeAvailable =
-            false;
         final sut = setupController(testDependencyContext);
         final imagePath = 'test_image_path';
 

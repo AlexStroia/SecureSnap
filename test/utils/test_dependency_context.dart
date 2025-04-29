@@ -20,9 +20,6 @@ Future<TestDependencyContext> createTestDependencyContext() async {
     ..registerLazySingleton<MockLocalAuthentication>(
       () => MockLocalAuthentication(),
     )
-    ..registerLazySingleton<MockSecureStorageRepository>(
-      () => MockSecureStorageRepository(),
-    )
     ..registerLazySingleton<MockPhotoRepository>(() => MockPhotoRepository())
     ..registerLazySingleton<MockBiometricRepository>(
       () => MockBiometricRepository(),
@@ -44,8 +41,6 @@ class TestDependencyContext extends DependencyContext {
   MockBiometricRepository get biometricRepository => this();
 
   MockLocalAuthentication get localAuth => this();
-
-  MockSecureStorageRepository get secureStorageRepository => this();
 }
 
 extension DisposableTestExt<T extends Disposable> on T {

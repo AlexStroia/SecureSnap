@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:secure_snap/models/photo_dto.dart';
 import 'package:secure_snap/repositories/photo_repository.dart';
-import 'package:secure_snap/repositories/secure_storage_repository.dart';
 
 import '../repositories/biometric_repository.dart';
 import '../utils/controller.dart';
@@ -23,10 +22,6 @@ class BiometricNotAvailableException extends HomeControllerEvent {
   const BiometricNotAvailableException();
 }
 
-class PinAvailable extends HomeControllerEvent {
-  const PinAvailable();
-}
-
 //TODO CHECK WITH EXCEPTIONS
 class PhotoSavingException extends HomeControllerEvent {
   const PhotoSavingException();
@@ -36,14 +31,10 @@ class HomeController extends Controller {
   HomeController({
     required PhotoRepository photoRepository,
     required BiometricRepository biometricRepository,
-    required SecureStorageRepository secureStorageRepository,
   }) : _photoRepository = photoRepository,
-       _biometricRepository = biometricRepository,
-       _secureStorageRepository = secureStorageRepository;
-
+       _biometricRepository = biometricRepository;
   final PhotoRepository _photoRepository;
   final BiometricRepository _biometricRepository;
-  final SecureStorageRepository _secureStorageRepository;
 
   bool _isLoading = false;
 
@@ -83,13 +74,6 @@ class HomeController extends Controller {
       }
       return true;
     } on PlatformException catch (error) {
-      final isPinAvailable = await _secureStorageRepository.isPinAvailable();
-      if (isPinAvailable) {
-        event = const PinAvailable();
-        tryNotifyListeners();
-        return false;
-      }
-
       if (error.code == auth_error.notAvailable ||
           error.code == auth_error.notEnrolled) {
         event = BiometricNotAvailableException();

@@ -26,7 +26,6 @@ class HomePage extends StatelessWidget {
         return HomeController(
           photoRepository: dependencyContext(),
           biometricRepository: dependencyContext(),
-          secureStorageRepository: dependencyContext(),
         );
       },
       listener: (controller) {
@@ -50,13 +49,8 @@ class HomePage extends StatelessWidget {
 
           case BiometricNotAvailableException _:
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(l10n.biometric_not_available)),
+              SnackBar(content: Text(l10n.view_photo_biometric_error)),
             );
-            context.push('/home/set-pin');
-            break;
-
-          case PinAvailable _:
-            context.push('/home/enter-pin');
             break;
 
           default:
