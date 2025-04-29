@@ -7,7 +7,6 @@ import 'app.dart';
 import 'database/database.dart';
 import 'di.dart';
 
-
 bool isIntegrationTest = false;
 
 PhotoPickerService? photoPickerService;
