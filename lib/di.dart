@@ -38,19 +38,22 @@ class DependencyContext implements Disposable {
     );
   }
 
-  Future<void> allReady() {
-    _register();
+  Future<void> allReady({bool isIntegrationTest = false}) {
+    _register(isIntegrationTest);
     return getIt.allReady();
   }
 
-  GetIt _register() {
+  GetIt _register(bool isIntegrationTest) {
     getIt
       ..registerLazySingleton<LocalAuthentication>(() => LocalAuthentication())
       ..registerLazySingleton<PhotoRepository>(
         () => PhotoRepositoryImpl(database: getIt<Database>()),
       )
       ..registerLazySingleton<BiometricRepository>(
-        () => RealBiometricRepositoryImpl(localAuth: getIt()),
+        () =>
+            isIntegrationTest
+                ? FakeBiometricRepositoryImpl()
+                : RealBiometricRepositoryImpl(localAuth: getIt()),
       );
 
     return getIt;
