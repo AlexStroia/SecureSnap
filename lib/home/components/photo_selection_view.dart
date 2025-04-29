@@ -81,50 +81,13 @@ class _PhotoSelectionViewState extends State<PhotoSelectionView> {
   }
 
   Future<void> _onPhotoSavePressed() async {
-    final l10n = L10n.of(context);
     final navigator = Navigator.of(context);
     await showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(l10n.are_you_sure_save_photo, textAlign: TextAlign.center),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: TextButton.icon(
-                      key: Key('save_photo_yes'),
-                      icon: const Icon(Icons.check),
-                      onPressed: () {
-                        final imagePath = _imagePath;
-                        if (imagePath != null) {
-                          Navigator.of(context).pop(true);
-                          widget.onPhotoSaved?.call(imagePath);
-                        }
-                      },
-                      label: Text(l10n.yes),
-                    ),
-                  ),
-                  Flexible(
-                    child: TextButton.icon(
-                      icon: const Icon(Icons.close),
-                      onPressed: () => Navigator.of(context).pop(false),
-                      label: Text(l10n.no),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+        return _ConfirmPhotoSaveView(
+          imagePath: _imagePath,
+          onPhotoSaved: widget.onPhotoSaved,
         );
       },
     );
@@ -149,5 +112,62 @@ class _PhotoSelectionViewState extends State<PhotoSelectionView> {
         _imagePath = pickedImage.path;
       });
     }
+  }
+}
+
+class _ConfirmPhotoSaveView extends StatelessWidget {
+  final String? imagePath;
+
+  final ValueChanged<String>? onPhotoSaved;
+
+  const _ConfirmPhotoSaveView({
+    required this.imagePath,
+    required this.onPhotoSaved,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(l10n.are_you_sure_save_photo, textAlign: TextAlign.center),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: TextButton.icon(
+                  key: Key('save_photo_yes'),
+                  icon: const Icon(Icons.check),
+                  onPressed: () {
+                    final imagePath = this.imagePath;
+                    if (imagePath != null) {
+                      Navigator.of(context).pop(true);
+                      onPhotoSaved?.call(imagePath);
+                    }
+                  },
+                  label: Text(l10n.yes),
+                ),
+              ),
+              Flexible(
+                child: TextButton.icon(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(false),
+                  label: Text(l10n.no),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
